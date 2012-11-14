@@ -6,6 +6,9 @@ var mapOptions = {
 };
 var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
 
+var infowindow = new google.maps.InfoWindow({
+});
+
 var image = 'tower.png';
 
 /* list of countries and coords. */
@@ -36,9 +39,6 @@ $.getJSON("airports.json", function(airportsdb) {
         /* HTML code for popups */
         var contentString = "<div class='element '><h1>" + data.icao + "</h1><p>City: " + data.city + "</p><p>DST: " + data.dst + " </p><p>Timezone: " + data.tzone + "</p><p>Country: " + data.country + "</p><p>Lat/Long: " + data.lat + " | " + data.long + "</p></div>";
 
-        var infowindow = new google.maps.InfoWindow({
-            content : contentString
-        });
         /* exclude airports without icao codes (coordinates are wrong) */
 		if (data.icao !== 'NUI') {
 		  var marker = new google.maps.Marker({
@@ -48,6 +48,8 @@ $.getJSON("airports.json", function(airportsdb) {
 			  icon: image
 		  });
 		  google.maps.event.addListener(marker, 'click', function() {
+		        /* there's only one infoWindow, change the contents for the current marker */
+		        infowindow.setContent(contentString);
 		  		infowindow.open(map,marker);
 		  });
 		  /* send formed markers to var markers */
