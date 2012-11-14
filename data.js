@@ -51,7 +51,7 @@ $.getJSON("airports.json", function(airportsdb) {
 		  		infowindow.open(map,marker);
 		  });
 		  /* send formed markers to var markers */
-		  		      markers.push(marker);
+		  markers.push(marker);
 		  }
     });
 
@@ -66,13 +66,11 @@ $.getJSON("airports.json", function(airportsdb) {
  * with options */
 
 function populateCountries() {
-    /* sort the list */
-    countries.sort();
 
     /* make a fragment of HTML code containing
      * all the countries as <OPTION> tags */
     var fragment = '';
-    $.each(countries, function(key, country) {
+    $.each(countries.sort(), function(key, country) {
         fragment += '<option value="' + country + '">' + country + '</option>';
     });
 
