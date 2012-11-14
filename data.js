@@ -38,15 +38,18 @@ $.getJSON("airports.json", function(airportsdb) {
         var infowindow = new google.maps.InfoWindow({
             content : contentString
         });
-        var marker = new google.maps.Marker({
-            position : new google.maps.LatLng(data.lat, data.long),
-            map : map,
-            title : data.icao,
-            icon : image
-        });
-        google.maps.event.addListener(marker, 'click', function() {
-            infowindow.open(map, marker);
-        });
+        /* exclude airports without icao codes (coordinates are wrong) */
+		if (data.icao !== 'NUI') {
+		  var marker = new google.maps.Marker({
+			  position: new google.maps.LatLng(data.lat, data.long),
+			  map: map,
+			  title:data.icao,
+			  icon: image
+		  });
+		  google.maps.event.addListener(marker, 'click', function() {
+		  		infowindow.open(map,marker);
+		  });
+		  }
     });
 
     /* by now the countries list is filled, add all countries to the dropdown */
