@@ -11,6 +11,7 @@ var image = 'tower.png';
 /* list of countries and coords. */
 var countries = [];
 var coords = {};
+var markers = [];
 
 /* fetch JSON file */
 $.getJSON("airports.json", function(airportsdb) {
@@ -49,8 +50,12 @@ $.getJSON("airports.json", function(airportsdb) {
 		  google.maps.event.addListener(marker, 'click', function() {
 		  		infowindow.open(map,marker);
 		  });
+		  /* send formed markers to var markers */
+		  		      markers.push(marker);
 		  }
     });
+
+    var markerCluster = new MarkerClusterer(map, markers);
 
     /* by now the countries list is filled, add all countries to the dropdown */
     populateCountries();
@@ -82,5 +87,4 @@ function populateCountries() {
         /* moves map to the new coords. */
         map.setCenter(new google.maps.LatLng(coords[country]['lat'], coords[country]['long']));
     });
-
 }
