@@ -42,9 +42,9 @@ $.getJSON("airports.json", function(airportsdb) {
 		  var marker = new google.maps.Marker({
 			  position: new google.maps.LatLng(data.lat, data.long),
 			  map: map,
-			  title:data.icao,
+			  //title:data.icao,
 			  // using dynamic markers
-			  icon: 'http://chart.apis.google.com/chart?chst=d_simple_text_icon_above&chld=+|16|ff0033|glyphish_location|16|0000ff|ffffff'
+			  icon: 'http://chart.apis.google.com/chart?chst=d_text_outline&chld=FFCC33|14|h|FF0000|_|'+data.icao+''
 		  });
 		  google.maps.event.addListener(marker, 'click', function() {
 		        /* there's only one infoWindow, change the contents for the current marker */
