@@ -44,7 +44,7 @@ $.getJSON("airports.json", function(airportsdb) {
 			  map: map,
 			  //title:data.icao,
 			  // using dynamic markers
-			  icon: 'http://chart.apis.google.com/chart?chst=d_text_outline&chld=FFCC33|14|h|FF0000|_|'+data.icao+''
+			  icon: 'http://chart.apis.google.com/chart?chst=d_text_outline&chld=00ffff|14|h|0000ff|_|'+data.icao+''
 		  });
 		  google.maps.event.addListener(marker, 'click', function() {
 		        /* there's only one infoWindow, change the contents for the current marker */
