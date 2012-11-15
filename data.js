@@ -9,8 +9,6 @@ var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions)
 var infowindow = new google.maps.InfoWindow({
 });
 
-var image = 'tower.png';
-
 /* list of countries and coords. */
 var countries = [];
 var coords = {};
@@ -45,7 +43,8 @@ $.getJSON("airports.json", function(airportsdb) {
 			  position: new google.maps.LatLng(data.lat, data.long),
 			  map: map,
 			  title:data.icao,
-			  icon: image
+			  // using dynamic markers
+			  icon: 'http://chart.apis.google.com/chart?chst=d_simple_text_icon_above&chld=+|16|ff0033|glyphish_location|16|0000ff|ffffff'
 		  });
 		  google.maps.event.addListener(marker, 'click', function() {
 		        /* there's only one infoWindow, change the contents for the current marker */
