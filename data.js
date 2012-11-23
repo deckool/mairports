@@ -13,7 +13,7 @@ var infowindow = new google.maps.InfoWindow({
 var countries = [];
 var coords = {};
 var markers = [];
-var image = 'ico.gif';
+var image = 'tower.png';
 
 /* fetch JSON file */
 $.getJSON("airports.json", function(airportsdb) {
@@ -38,7 +38,7 @@ $.getJSON("airports.json", function(airportsdb) {
         /* HTML code for popups */
         var contentString = "<div class='element '><h1>" + data.icao + "</h1><p>City: " + data.city + "</p><p>DST: " + data.dst + " </p><p>Timezone: " + data.tzone + "</p><p>Country: " + data.country + "</p><p>Lat/Long: " + data.lat + " | " + data.long + "</p></div>";
 
-        /* exclude airports without icao codes */
+        /* exclude airports without icao codes (coordinates are wrong) */
 		if (data.icao !== 'NUI') {
 		  var marker = new google.maps.Marker({
 			  position: new google.maps.LatLng(data.lat, data.long),
@@ -55,27 +55,9 @@ $.getJSON("airports.json", function(airportsdb) {
 		  markers.push(marker);
 		  }
     });
-    
-		  /* set style options for marker clusters */
-			mcOptions = {styles: [{
-			height: 20,
-			url: "cluster1.gif",
-			width: 20
-			},
-			{
-			height: 25,
-			url: "cluster2.gif",
-			width: 25
-			},
-			{
-			height: 30,
-			url: "cluster3.gif",
-			width: 30
-			}]}
 
-			/* init clusterer with options */
-			var mc = new MarkerClusterer(map, markers, mcOptions);
-			
+    var markerCluster = new MarkerClusterer(map, markers);
+
     /* by now the countries list is filled, add all countries to the dropdown */
     populateCountries();
 
@@ -88,7 +70,7 @@ function populateCountries() {
 
     /* make a fragment of HTML code containing
      * all the countries as <OPTION> tags */
-    var fragment = '<option value="none">Choose a country</option>';
+    var fragment = '';
     $.each(countries.sort(), function(key, country) {
         fragment += '<option value="' + country + '">' + country + '</option>';
     });
