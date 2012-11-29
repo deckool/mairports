@@ -70,7 +70,7 @@ function populateCountries() {
 
     /* make a fragment of HTML code containing
      * all the countries as <OPTION> tags */
-    var fragment = '';
+    var fragment = '<option value="empty">Choose a country</option>';
     $.each(countries.sort(), function(key, country) {
         fragment += '<option value="' + country + '">' + country + '</option>';
     });
